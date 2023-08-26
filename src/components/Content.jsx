@@ -4,7 +4,6 @@ import style from "../style/content.module.css";
 import { DeleteIcon } from "@chakra-ui/icons";
 
 const Content = () => {
-  const [countDone, setCountDone] = useState(0);
   const [submitTask, setSubmitTask] = useState("");
   const [optionList, setOptionList] = useState([
     "Create Guest Experience Mobile Check-in",
@@ -15,7 +14,10 @@ const Content = () => {
     "Provide on-boarding documentation",
   ]);
 
-  const [deleteTask, setDeleteTask] = useState([""])
+  const handleDelete = (index) => {
+    const updatedOptionList = optionList.filter((_, i) => i !== index);
+    setOptionList(updatedOptionList);
+  }
 
   return (
     <div className={style.box}>
@@ -40,6 +42,7 @@ const Content = () => {
                     variant={"outline"}
                     colorScheme="red"
                     icon={<DeleteIcon />}
+                    onClick = {() => handleDelete(index)}
                   ></IconButton>
                 </li>
               );
@@ -57,7 +60,7 @@ const Content = () => {
             marginTop: "20px",
           }}
         >
-          Done {countDone}
+          Done 0
         </Heading>
         <Heading
           color={"white"}
